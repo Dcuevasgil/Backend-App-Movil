@@ -1,0 +1,21 @@
+Voy a realizar una web donde un usuario debe registrarse con los siguientes datos:
+Nombre
+Correo
+Contraseña
+Una vez registrado se actualiza en el perfil con:
+Sexo – desplegable (H – M)
+Sobre mi
+Localidad
+Foto de perfil (Foto usuario)
+Este esquema de base de datos seria correcto? Modificalo si es necesario y dame el código SQL
+
+Route::middleware('api')->group(function () {
+    // Rutas de la API
+
+    // Perfiles
+    Route::get('/usuarios', [UsuarioController::class, 'obtenerUsuarios']);
+    Route::post('/usuarios/registro', [UsuarioController::class, 'registrarPerfil']);
+
+    // Localidades
+    Route::get('localidades', [LocalidadController::class, 'obtenerLocalidades']);
+});
