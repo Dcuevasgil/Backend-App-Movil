@@ -1,25 +1,18 @@
 <?php
 
-// Importacion para los metodos de Postman
+use App\Http\Controllers\ApiEPV\LocalidadController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiEPV\UsuarioController;
 
-// Importaciones Controladores
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\GeneroController;
-use App\Http\Controllers\CiudadController;
 
-// Métodos para el usuario
-// POST
-Route::post('/registro', [UsuarioController::class, 'registrarUsuario']);
+Route::group(['middleware' => 'api'], function () {
+    
+    // Endpoints usuarios
+    Route::get('/usuarios', [UsuarioController::class, 'obtenerUsuarios']);
+    Route::post('/usuarios/registro', [UsuarioController::class, 'registrarPerfil']);
+    Route::put('/usuarios/{id}', [UsuarioController::class, 'actualizarPerfil']);
+    Route::delete('/usuarios/{id}', [UsuarioController::class, 'eliminarPerfil']);
 
-// GET
-Route::get('/usuarios', [UsuarioController::class, 'obtenerUsuarios']);
-
-// Metodos para el genero del usuario
-// GET
-Route::get('/api/generos', [GeneroController::class, 'obtenerGeneros']);
-
-// Metodos para las ciudades del usuario
-// GET
-Route::get('/api/ciudades', [CiudadController::class, 'obtenerCiudades']);
-
+    // Endpoints localidades
+    Route::get('/localidades', [LocalidadController::class, 'obtenerLocalidades']);
+});
